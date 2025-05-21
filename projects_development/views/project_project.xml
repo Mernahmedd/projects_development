@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+    
+        <record id="edit_project_inherit_edits_employee_access" model="ir.ui.view">
+            <field name="name">project.project.view.form.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group//group[1]" position="inside">
+                    <field name="odoo_version" />
+                    <field name="github_repo" />
+                    <field name="hosting" />
+                </xpath>
+                <xpath expr="//group//group[2]" position="inside">
+                    <field name="odoo_type" />
+                    <field name="github_url" widget="url" />
+                    <field name="hosting_description" />
+                </xpath>
+                <xpath expr="//notebook//page[@name='description']" position="before">
+                    <page name="collaborators" string="Collaborators">
+                        <field name="collaborators_ids">
+                            <list string="Collaborators" editable="bottom" decoration-success="state=='active'" decoration-danger="state=='inactive'">
+                                <field name="employee_id"/>
+                                <field name="project_id" column_invisible="1" />
+                                <field name="state"/>
+                                <button name="action_active" type="object" string="Active" invisible="state == 'active'" />
+                                <button name="action_inactive" type="object" string="Inactive" invisible="state == 'inactive'" />
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+    
+</odoo>
